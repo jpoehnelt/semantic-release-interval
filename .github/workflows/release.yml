@@ -32,6 +32,7 @@ jobs:
         with:
           extra_plugins: |
             @semantic-release/commit-analyzer
+            semantic-release-interval
             @semantic-release/release-notes-generator
             @semantic-release/git
             @semantic-release/github
