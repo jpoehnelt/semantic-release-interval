@@ -19,8 +19,8 @@ plugins:
   - [
       "semantic-release-interval",
       {
-        "units": "minute",
-        "duration": "10"
+        "units": "week",
+        "duration": "1"
       }
     ]
   - "@semantic-release/release-notes-generator"
