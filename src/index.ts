@@ -43,10 +43,7 @@ export async function analyzeCommits(
   }: PluginConfig,
   context: Context
 ): Promise<release | null> {
-  const { nextRelease } = context;
-
-  // @ts-ignore TODO fix invalid @types/semantic-release
-  const commits: Commit[] = context.commits;
+  const { nextRelease, commits } = context;
 
   if (nextRelease || !commits) {
     debug("Skipping interval based commit analysis.");

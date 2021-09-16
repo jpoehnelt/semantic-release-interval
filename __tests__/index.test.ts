@@ -16,7 +16,8 @@
 
 import * as m from "../src/index";
 
-import { Context } from "semantic-release";
+import { Commit, Context } from "semantic-release";
+
 import moment from "moment";
 
 const context = { logger: console, env: {} };
@@ -27,7 +28,10 @@ test("should expose analyzeCommits", async () => {
 
 test("should skip empty messages", async () => {
   await expect(
-    m.analyzeCommits({}, { ...context, commits: [{ message: "" }] } as Context)
+    m.analyzeCommits({}, {
+      ...context,
+      commits: [{ message: "" } as Commit],
+    } as Context)
   ).resolves.toEqual(null);
 });
 
@@ -43,11 +47,11 @@ test("should patch due to interval", async () => {
         {
           message: "foo",
           committerDate: moment().subtract(1, "day").toISOString(),
-        },
+        } as Commit,
         {
           message: "foo",
           committerDate: moment().subtract(1, "month").toISOString(),
-        },
+        } as Commit,
       ],
     } as Context)
   ).resolves.toEqual("patch");
@@ -61,11 +65,11 @@ test("should not patch due to interval", async () => {
         {
           message: "foo",
           committerDate: moment().subtract(1, "minute").toISOString(),
-        },
+        } as Commit,
         {
           message: "foo",
           committerDate: moment().subtract(2, "minute").toISOString(),
-        },
+        } as Commit,
       ],
     } as Context)
   ).resolves.toEqual(null);
@@ -79,7 +83,7 @@ test("should patch due to interval with custom config", async () => {
         {
           message: "foo",
           committerDate: moment().subtract(11, "day").toISOString(),
-        },        
+        } as Commit,
       ],
     } as Context)
   ).resolves.toEqual("major");
