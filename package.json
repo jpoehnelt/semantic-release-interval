@@ -1,0 +1,53 @@
+{
+  "name": "semantic-release-interval",
+  "version": "1.0.0",
+  "description": "Semantic Release Interval Plugin",
+  "keywords": [
+    "semantic-release",
+    "interval"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpoehnelt/semantic-release-interval.git"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Justin Poehnelt",
+    "email": "jpoehnelt@google.com"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "prepare": "tsc",
+    "format": "eslint --fix src/**/*.ts",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "debug": "^4.3.2",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.2",
+    "@types/semantic-release": "^17.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "eslint": "^7.19.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2",
+    "ts-jest": "^26.4.0",
+    "typescript": "^3.9.7"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
+  }
+}
