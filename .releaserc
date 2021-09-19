@@ -19,7 +19,7 @@ plugins:
   - [
       "semantic-release-interval",
       {
-        "units": "week",
+        "units": "day",
         "duration": "1"
       }
     ]
