@@ -15,7 +15,7 @@
  */
 
 import { Context } from "semantic-release";
-import moment from "moment";
+import dayjs from "dayjs";
 
 type release = "major" | "minor" | "patch";
 export interface PluginConfig {
@@ -59,15 +59,15 @@ export async function analyzeCommits(
 
   const committerDates = filteredCommits
     .map(({ committerDate }) => committerDate)
-    .sort() // sort before converting to moment
-    .map((date) => moment(date))
+    .map((date) => dayjs(date))
+    .sort((a, b) => (a.isAfter(b) ? 1 : -1));
 
   committerDates.forEach((date) => {
     logger.log(`committerDate: ${date.format()}`);
   });
 
   const firstCommitterDate = committerDates[0];
-  const thresholdDate = moment().subtract(duration, units);
+  const thresholdDate = dayjs().subtract(duration, units);
 
   const isBefore = firstCommitterDate.isBefore(thresholdDate);
 
