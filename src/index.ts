@@ -63,22 +63,25 @@ export async function analyzeCommits(
     .sort();
 
   committerDates.forEach((date) => {
-    logger.log(`Commit date: ${date.format()}`);
+    logger.log(`committerDate: ${date.format()}`);
   });
 
   const firstCommitterDate = committerDates[0];
   const thresholdDate = moment().subtract(duration, units);
 
-  if (firstCommitterDate.isBefore(thresholdDate)) {
-    logger.log(
-      `Earliest commit, ${firstCommitterDate.format()}, before ${thresholdDate.format()} (${duration} ${units}(s)).`
-    );
-    return release;
-  } else {
-    logger.log(
-      `Earliest commit, ${firstCommitterDate.format()}, after ${thresholdDate.format()} (${duration} ${units}(s)).`
-    );
-  }
+  const isBefore = firstCommitterDate.isBefore(thresholdDate);
 
+  logger.log(
+    `Oldest \`committerDate\` ${
+      isBefore ? "before" : "after"
+    } threshold, ${duration} ${units}(s).
+  oldest commit: ${firstCommitterDate.format()}
+  threshold:     ${thresholdDate.format()}`
+  );
+
+  if (isBefore) {
+    logger.log(`Setting release to '${release}' based upon interval.`);
+    return release;
+  }
   return null;
 }
