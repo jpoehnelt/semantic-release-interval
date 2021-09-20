@@ -18,7 +18,7 @@ import * as m from "../src/index";
 
 import { Commit, Context } from "semantic-release";
 
-import moment from "moment";
+import dayjs from "dayjs";
 
 const context = { logger: console, env: {} };
 
@@ -46,11 +46,11 @@ test("should patch due to interval", async () => {
       commits: [
         {
           message: "foo",
-          committerDate: moment().subtract(1, "day").toISOString(),
+          committerDate: dayjs().subtract(1, "day").toISOString(),
         } as Commit,
         {
           message: "foo",
-          committerDate: moment().subtract(1, "month").toISOString(),
+          committerDate: dayjs().subtract(1, "month").toISOString(),
         } as Commit,
       ],
     } as Context)
@@ -64,11 +64,11 @@ test("should not patch due to interval", async () => {
       commits: [
         {
           message: "foo",
-          committerDate: moment().subtract(1, "minute").toISOString(),
+          committerDate: dayjs().subtract(1, "minute").toISOString(),
         } as Commit,
         {
           message: "foo",
-          committerDate: moment().subtract(2, "minute").toISOString(),
+          committerDate: dayjs().subtract(2, "minute").toISOString(),
         } as Commit,
       ],
     } as Context)
@@ -82,7 +82,7 @@ test("should patch due to interval with custom config", async () => {
       commits: [
         {
           message: "foo",
-          committerDate: moment().subtract(11, "day").toISOString(),
+          committerDate: dayjs().subtract(11, "day").toISOString(),
         } as Commit,
       ],
     } as Context)
