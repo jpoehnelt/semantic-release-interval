@@ -59,8 +59,8 @@ export async function analyzeCommits(
 
   const committerDates = filteredCommits
     .map(({ committerDate }) => committerDate)
+    .sort() // sort before converting to moment
     .map((date) => moment(date))
-    .sort();
 
   committerDates.forEach((date) => {
     logger.log(`committerDate: ${date.format()}`);
