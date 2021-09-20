@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import { Commit, Context } from "semantic-release";
-
+import { Context } from "semantic-release";
 import Debugger from "debug";
 import moment from "moment";
 
-const debug = Debugger("semantic-release-interval");
+const debug = Debugger("semantic-release:semantic-release-interval");
 
 type release = "major" | "minor" | "patch";
 export interface PluginConfig {
