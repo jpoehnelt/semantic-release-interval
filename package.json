@@ -29,11 +29,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "debug": "^4.3.2",
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.7",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.4",
     "@types/semantic-release": "^17.2.1",
