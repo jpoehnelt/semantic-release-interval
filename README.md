@@ -11,6 +11,7 @@ The `semantic-release-interval` plugin provides functionality to trigger a relea
 
 Read more about [Semantic Release](https://semantic-release.gitbook.io/).
 
+> **Note**: The release determined by this package **does not** override any previous release analysis and short circuits if `nextRelease` is already defined.
 ## Install
 
 ```bash
