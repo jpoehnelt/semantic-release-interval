@@ -7,7 +7,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/jpoehnelt/semantic-release-interval?color=green)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-The `semantic-release-interval` plugin provides functionality to trigger a release if the oldest commit is greater than some specific duration.
+The `semantic-release-interval` plugin provides functionality to riggers a new release if the oldest commit since the last release is over a certain age.
 
 Read more about [Semantic Release](https://semantic-release.gitbook.io/).
 
