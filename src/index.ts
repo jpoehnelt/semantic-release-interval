@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import { Commit, Context } from "semantic-release";
-
+import { Context } from "semantic-release";
 import Debugger from "debug";
 import moment from "moment";
 
-const debug = Debugger("semantic-release-interval");
+const debug = Debugger("semantic-release:semantic-release-interval");
 
 type release = "major" | "minor" | "patch";
 export interface PluginConfig {
@@ -46,7 +45,7 @@ export async function analyzeCommits(
   const { nextRelease, commits } = context;
 
   if (nextRelease || !commits) {
-    debug("Skipping interval based commit analysis.");
+    debug("Skipping interval based commit analysis since release already set.");
     return null;
   }
 
@@ -59,19 +58,27 @@ export async function analyzeCommits(
     return null;
   }
 
-  const firstCommitDate = filteredCommits
+  const committerDates = filteredCommits
     .map(({ committerDate }) => committerDate)
     .map((date) => moment(date))
-    .sort()[0];
+    .sort();
 
+  committerDates.forEach((date) => {
+    debug(`Commit date: ${date.format()}`);
+  });
+
+  const firstCommitterDate = committerDates[0];
   const thresholdDate = moment().subtract(duration, units);
 
-  if (firstCommitDate && firstCommitDate.isBefore(thresholdDate)) {
+  if (firstCommitterDate.isBefore(thresholdDate)) {
     debug(
-      `Earliest commit from: ${firstCommitDate} and before ${thresholdDate} (${duration} ${units}(s)).`
+      `Earliest commit, ${firstCommitterDate}, before ${thresholdDate} (${duration} ${units}(s)).`
     );
-
     return release;
+  } else {
+    debug(
+      `Earliest commit, ${firstCommitterDate}, after ${thresholdDate} (${duration} ${units}(s)).`
+    );
   }
 
   return null;
