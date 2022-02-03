@@ -4,6 +4,8 @@
   "description": "Semantic Release Interval Plugin",
   "keywords": [
     "semantic-release",
+    "semantic-release-plugin",
+    "calver",
     "interval"
   ],
   "repository": {
